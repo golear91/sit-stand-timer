@@ -108,6 +108,12 @@ gulp.task('size', () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
+gulp.task('compile', function(){
+  gulp.src(['app/**/*.ts'])
+    .pipe($.typescript())
+    .pipe(gulp.dest('dist/'))
+});
+
 gulp.task('wiredep', () => {
   gulp.src('app/*.html')
     .pipe(wiredep({

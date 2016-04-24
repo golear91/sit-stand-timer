@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "ES5",
+        "module": "system",
+        "moduleResolution": "node",
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": false,
+        "noImplicitAny": false,
+        "declaration": true,
+        "rootDir": "app",
+        "outDir": "dist"
+    },
+    "exclude": [
+        "dist",
+        "node_modules",
+        "typings/main",
+        "typings/main.d.ts"
+    ]
+}
