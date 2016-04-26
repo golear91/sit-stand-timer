@@ -5,6 +5,7 @@
   "ambientDependencies": {
     "MediaStream": "github:DefinitelyTyped/DefinitelyTyped/webrtc/MediaStream.d.ts#9027703c0bd831319dcdf7f3169f7a468537f448",
     "bootbox": "github:DefinitelyTyped/DefinitelyTyped/bootbox/bootbox.d.ts#431cfb31159016aa1c4620504fd8fee54a2f8958",
+    "bootstrap-slider": "registry:dt/bootstrap-slider#4.8.3+20160316155526",
     "bootstrap-switch": "github:DefinitelyTyped/DefinitelyTyped/bootstrap-switch/bootstrap-switch.d.ts#7de6c3dd94feaeb21f20054b9f30d5dabc5efabd",
     "chrome": "github:DefinitelyTyped/DefinitelyTyped/chrome/chrome.d.ts#39ced332d31a4c9cdfb4d568e8ef69b18932b6eb",
     "es6-shim": "github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts#6697d6f7dadbf5773cb40ecda35a76027e0783b2",
