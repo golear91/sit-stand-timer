@@ -37,7 +37,12 @@ let sitDownNotification = {
 chrome.idle.onStateChanged.addListener(function (newState) {
     console.log("idle newState:" + newState);
     chrome.notifications.clear(STANDARD_NOTIFICATION_ID);
+    chrome.alarms.clear(ALARM_NAME);
     if (newState === 'active') {
+        chrome.alarms.create(ALARM_NAME, {
+            delayInMinutes: NOTIFICATION_FREQUENCY_MINUTES,
+            periodInMinutes: NOTIFICATION_FREQUENCY_MINUTES
+        });
         chrome.notifications.create(IDLE_STATE_NOTIFICATION_ID, {
             type: 'basic',
             iconUrl: 'images/sitting-icon-38.png',
@@ -81,10 +86,6 @@ chrome.notifications.onButtonClicked.addListener(function (notificationId, butto
     chrome.notifications.clear(notificationId);
 });
 
-chrome.idle.onStateChanged.addListener(function (newState) {
-    console.log(`idle state changed to ${newState}`);
-});
-
 chrome.runtime.onInstalled.addListener(details => {
     console.log('previousVersion', details.previousVersion);
 });
@@ -102,7 +103,7 @@ chrome.alarms.onAlarm.addListener(function (alarm) {
 });
 
 chrome.alarms.create(ALARM_NAME, {
-    delayInMinutes: 1,
+    delayInMinutes: NOTIFICATION_FREQUENCY_MINUTES,
     periodInMinutes: NOTIFICATION_FREQUENCY_MINUTES
 });
 
