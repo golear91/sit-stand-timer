@@ -1,13 +1,26 @@
 'use strict';
 
-$('#foo').slider({
-  formatter: function(value) {
-    return `${value} minutes`;
+const INTERVAL_STORAGE_KEY: string = 'interval-storage-key';
+
+chrome.storage.local.get(INTERVAL_STORAGE_KEY, function (result) {
+  let interval: number = 30;
+  if (result[INTERVAL_STORAGE_KEY] != 'undefined') {
+    interval = result[INTERVAL_STORAGE_KEY];
   }
-})
-.on('slide', (ev)=>{
-  $('#minutes').html(ev.value.toString());
+  $('#foo').slider({
+    value: interval,
+    formatter: function (value) {
+      return `${value} minutes`;
+    }
+  })
+    .on('slideStop', (ev) => {
+      let obj = {};
+      obj[INTERVAL_STORAGE_KEY] = ev.value;
+      chrome.storage.local.set(obj);
+    });
 });
+
+
 /*
 {
   min:0,

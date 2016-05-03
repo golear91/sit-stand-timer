@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <!-- build:css styles/popup-vendor.css -->
     <!-- bower:css -->
+    <link href="bower_components/bootstrap/dist/css/boostrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/bootstrap-slider/slider.css">
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css styles/main.css -->
@@ -12,14 +14,18 @@
   </head>
   <body>
     <h1>Placeholder</h1>
-
-    <!-- build:js scripts/popup-vendor.js -->
+    <input type="text" class="slider" value="" data-slider-min="-20" data-slider-max="20" data-slider-step="1" data-slider-value="-14" data-slider-selection="after"data-slider-tooltip="hide">
+    <!-- build:js scripts/options-vendor.js -->
     <!-- bower:js -->
+    <script src="bower_components/jQuery/dist/jQuery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script> 
+    <script src="bower_components/bootstrap-slider/bootstrap-slider.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js scripts/popup.js -->
-    <script src="scripts/popup.js"></script>
+
+    <!-- build:js scripts/options.js -->
+    <script src="scripts/options.js"></script>
     <!-- endbuild -->
   </body>
 </html>

@@ -1,14 +1,33 @@
 'use strict';
 
 const ALARM_NAME: string = "notification-alarm";
-const NOTIFICATION_FREQUENCY_MINUTES: number = 1;
+//const NOTIFICATION_FREQUENCY_MINUTES: number = 1;
+let notificationFrequencyMinutes: number;
 let count: number = 0;
+let sitting: boolean = true;
 
 const STARTUP_NOTIFICATION_ID: string = 'sit-stand-startup';
 const IDLE_STATE_NOTIFICATION_ID: string = 'sit-stand-idle';
 const STANDARD_NOTIFICATION_ID: string = 'sit-stand-standard';
+const INTERVAL_STORAGE_KEY: string = 'interval-storage-key';
 
-let sitting: boolean = true;
+// Replace previous alarm if present
+function startAlarm() {
+    chrome.alarms.create(ALARM_NAME, {
+        delayInMinutes: notificationFrequencyMinutes,
+        periodInMinutes: notificationFrequencyMinutes
+    });
+}
+
+chrome.storage.onChanged.addListener(function (changes, areaName) {
+    if (areaName === "local") {
+        if (changes[INTERVAL_STORAGE_KEY]) {
+            console.log("alarm time change:", changes[INTERVAL_STORAGE_KEY].newValue);
+            notificationFrequencyMinutes = changes[INTERVAL_STORAGE_KEY].newValue;
+            startAlarm();
+        }
+    }
+});
 
 let standupNotification = {
     type: 'basic',
@@ -39,10 +58,7 @@ chrome.idle.onStateChanged.addListener(function (newState) {
     chrome.notifications.clear(STANDARD_NOTIFICATION_ID);
     chrome.alarms.clear(ALARM_NAME);
     if (newState === 'active') {
-        chrome.alarms.create(ALARM_NAME, {
-            delayInMinutes: NOTIFICATION_FREQUENCY_MINUTES,
-            periodInMinutes: NOTIFICATION_FREQUENCY_MINUTES
-        });
+        startAlarm();
         chrome.notifications.create(IDLE_STATE_NOTIFICATION_ID, {
             type: 'basic',
             iconUrl: 'images/sitting-icon-38.png',
@@ -102,9 +118,12 @@ chrome.alarms.onAlarm.addListener(function (alarm) {
     }
 });
 
-chrome.alarms.create(ALARM_NAME, {
-    delayInMinutes: NOTIFICATION_FREQUENCY_MINUTES,
-    periodInMinutes: NOTIFICATION_FREQUENCY_MINUTES
+chrome.storage.local.get(INTERVAL_STORAGE_KEY, function (result) {
+    if (result[INTERVAL_STORAGE_KEY]) {
+        notificationFrequencyMinutes = result[INTERVAL_STORAGE_KEY];
+        console.log("starting alarm:", notificationFrequencyMinutes, " minutes");
+        startAlarm();
+    }
 });
 
 console.log('\'Allo \'Allo! Event Page for Browser Action');
