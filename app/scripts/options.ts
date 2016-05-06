@@ -1,7 +1,5 @@
 'use strict';
 
-const INTERVAL_STORAGE_KEY: string = 'interval-storage-key';
-
 chrome.storage.local.get(INTERVAL_STORAGE_KEY, function (result) {
   let interval: number = 30;
   if (result[INTERVAL_STORAGE_KEY] != 'undefined') {

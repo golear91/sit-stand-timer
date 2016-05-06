@@ -79,13 +79,13 @@ gulp.task('chromeManifest', () => {
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('babel', () => {
-  return gulp.src('app/scripts.babel/**/*.js')
-      .pipe($.babel({
-        presets: ['es2015']
-      }))
-      .pipe(gulp.dest('app/scripts'));
-});
+// gulp.task('babel', () => {
+//   return gulp.src('app/scripts.babel/**/*.js')
+//       .pipe($.babel({
+//         presets: ['es2015']
+//       }))
+//       .pipe(gulp.dest('app/scripts'));
+// });
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
@@ -131,7 +131,9 @@ gulp.task('package', function () {
 
 gulp.task('build', (cb) => {
   runSequence(
-    'lint', 'babel', 'chromeManifest',
+    'lint', 
+    //'babel', 
+    'chromeManifest',
     ['html', 'images', 'extras'],
     'size', cb);
 });

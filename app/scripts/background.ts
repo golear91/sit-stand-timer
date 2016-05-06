@@ -1,15 +1,9 @@
 'use strict';
 
-const ALARM_NAME: string = "notification-alarm";
-//const NOTIFICATION_FREQUENCY_MINUTES: number = 1;
 let notificationFrequencyMinutes: number;
 let count: number = 0;
 let sitting: boolean = true;
 
-const STARTUP_NOTIFICATION_ID: string = 'sit-stand-startup';
-const IDLE_STATE_NOTIFICATION_ID: string = 'sit-stand-idle';
-const STANDARD_NOTIFICATION_ID: string = 'sit-stand-standard';
-const INTERVAL_STORAGE_KEY: string = 'interval-storage-key';
 
 // Replace previous alarm if present
 function startAlarm() {

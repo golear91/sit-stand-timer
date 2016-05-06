@@ -11,7 +11,7 @@
         "noImplicitAny": false,
         "declaration": true,
         "rootDir": "app",
-        "outDir": "dist"
+        "outDir": "app"
     },
     "exclude": [
         "dist",
